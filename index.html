@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Automatic Followup System</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <table class="form" border="0" cellspacing="5" cellpadding="5">
+      <tbody>
+        <tr>
+          <td>Minimum age:</td>
+          <td><input type="text" id="min-age" name="min" /></td>
+        </tr>
+        <tr>
+          <td>Maximum age:</td>
+          <td><input type="text" id="max-age" name="max" /></td>
+        </tr>
+        <tr>
+          <td>Minimum Salary:</td>
+          <td><input type="text" id="min-salary" name="min" /></td>
+        </tr>
+        <tr>
+          <td>Maximum Salary:</td>
+          <td><input type="text" id="max-salary" name="max" /></td>
+        </tr>
+        <tr>
+          <td>
+            <select id="drop-down" name="select-dropdown">
+              <option value="0">None</option>
+              <option value="1">Top to Bottom</option>
+              <option value="2">100,000 - 200,000</option>
+              <option value="3">200,000 - 300,000</option>
+              <option value="4">Bottom to Top</option>
+            </select>
+            <button class="search-btn" id="search-btn">Search</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table id="table" sclass="display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Office</th>
+          <th>Age</th>
+          <th>Start date</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+
+      <tbody id="table-body"></tbody>
+    </table>
+
+    <div id="next-btns"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
