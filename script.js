@@ -4,10 +4,11 @@ const searchBtn = document.getElementById("search-btn");
 const dropDown = document.getElementById("drop-down");
 let data;
 
-const BASE_URL = "https://www.autofs.com/sortapi.php";
+const BASE_URL =
+  "https://cors-anywhere.herokuapp.com/https://www.autofs.com/sortapi.php";
 
 const getData = async () => {
-  const response = await fetch(BASE_URL);
+  const response = await fetch(BASE_URL, { method: "GET" });
   data = await response.json();
   displayData(data.slice(0, 10));
   displayButtons(data);
