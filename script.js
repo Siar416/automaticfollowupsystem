@@ -4,6 +4,8 @@ const searchBtn = document.getElementById("search-btn");
 const dropDown = document.getElementById("drop-down");
 let data;
 
+// @TODO need to create a backend to make API call and send data down to client
+
 const BASE_URL =
   "https://cors-anywhere.herokuapp.com/https://www.autofs.com/sortapi.php";
 
