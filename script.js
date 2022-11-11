@@ -6,8 +6,7 @@ let data;
 
 // @TODO need to create a backend to make API call and send data down to client
 
-const BASE_URL =
-  "https://cors-anywhere.herokuapp.com/https://www.autofs.com/sortapi.php";
+const BASE_URL = "https://www.autofs.com/sortapi.php";
 
 const getData = async () => {
   const response = await fetch(BASE_URL, { method: "GET" });
