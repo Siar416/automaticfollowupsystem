@@ -6,10 +6,12 @@ let data;
 
 // @TODO need to create a backend to make API call and send data down to client
 
-const BASE_URL = "https://www.autofs.com/sortapi.php";
+// const BASE_URL = "https://www.autofs.com/sortapi.php";
+
+const BASE_URL = "http://localhost:3000/api/v1/people";
 
 const getData = async () => {
-  const response = await fetch(BASE_URL, { method: "GET" });
+  const response = await fetch(BASE_URL);
   data = await response.json();
   displayData(data.slice(0, 10));
   displayButtons(data);

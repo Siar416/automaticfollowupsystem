@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
 
   const data = await response.data;
 
-  res.send(data);
+  res.json(data);
 });
 
 module.exports = router;
