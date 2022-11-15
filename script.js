@@ -4,10 +4,6 @@ const searchBtn = document.getElementById("search-btn");
 const dropDown = document.getElementById("drop-down");
 let data;
 
-// @TODO need to create a backend to make API call and send data down to client
-
-// const BASE_URL = "https://www.autofs.com/sortapi.php";
-
 const BASE_URL = "http://localhost:3000/api/v1/people";
 
 const getData = async () => {
@@ -74,17 +70,23 @@ const filterData = () => {
         return person;
       }
     } else if (dropDown.value === "1") {
-      return data.sort((a, b) => b.Employee_Salary - a.Employee_Salary);
+      return data.sort((a, b) => a.Employee_Salary - b.Employee_Salary);
     } else if (dropDown.value === "2") {
       console.log(dropDown.value);
 
       return data.filter((person) => {
-        if (
-          person.Employee_Salary >= 100000 &&
-          person.Employee_Salary <= 200000
-        ) {
+        // @TODO - need to fix the filter
+
+        if (person.Employee_Salary >= "100000") {
           return person;
         }
+
+        // if (
+        //   person.Employee_Salary >= 100000 &&
+        //   person.Employee_Salary <= 200000
+        // ) {
+        //   return person;
+        // }
       });
     } else if (dropDown.value === "3") {
       return data.filter((person) => {
@@ -96,7 +98,7 @@ const filterData = () => {
         }
       });
     } else if (dropDown.value === "4") {
-      return data.sort((a, b) => a.Employee_Salary - b.Employee_Salary);
+      return data.sort((a, b) => b.Employee_Salary - a.Employee_Salary);
     } else {
       return person;
     }
