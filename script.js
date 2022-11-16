@@ -17,8 +17,8 @@ const clearButton = () => {
   btnEl.innerHTML = "";
 };
 
-const displayData = (data) => {
-  const htmlString = data
+const displayData = (incomingData) => {
+  const htmlString = incomingData
     .map((person) => {
       return `<tr>
     <td>${person.Employee_Name}</td>
@@ -51,13 +51,13 @@ const displayButtons = (data) => {
   });
 };
 
-const filterData = () => {
+const filterData = (incomingData) => {
   const minAge = document.getElementById("min-age").value;
   const maxAge = document.getElementById("max-age").value;
   const minSalary = document.getElementById("min-salary").value;
   const maxSalary = document.getElementById("max-salary").value;
 
-  const filteredData = data.filter((person) => {
+  const filteredData = incomingData.filter((person) => {
     console.log(minSalary, maxSalary);
     if (minAge && maxAge) {
       if (person.Employee_Age >= minAge && person.Employee_Age <= maxAge) {
@@ -71,14 +71,18 @@ const filterData = () => {
         return person;
       }
     } else if (dropDown.value === "1") {
-      return data.sort((a, b) => a.Employee_Salary - b.Employee_Salary);
+      return incomingData.sort((a, b) => a.Employee_Salary - b.Employee_Salary);
     } else if (dropDown.value === "2") {
       console.log(dropDown.value);
 
-      return data.filter((person) => {
+      return incomingData.filter((person) => {
         // @TODO - need to fix the filter
 
-        if (person.Employee_Salary >= "100000") {
+        if (
+          +person.Employee_Salary >= 100000 &&
+          +person.Employee_Salary <= 200000
+        ) {
+          console.log(person.Employee_Salary);
           return person;
         }
         if (
@@ -89,7 +93,7 @@ const filterData = () => {
         }
       });
     } else if (dropDown.value === "3") {
-      return data.filter((person) => {
+      return incomingData.filter((person) => {
         if (
           person.Employee_Salary >= 200000 &&
           person.Employee_Salary <= 300000
@@ -98,7 +102,7 @@ const filterData = () => {
         }
       });
     } else if (dropDown.value === "4") {
-      return data.sort((a, b) => b.Employee_Salary - a.Employee_Salary);
+      return incomingData.sort((a, b) => b.Employee_Salary - a.Employee_Salary);
     } else {
       return person;
     }
