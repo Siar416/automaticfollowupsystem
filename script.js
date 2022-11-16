@@ -76,8 +76,6 @@ const filterData = (incomingData) => {
       console.log(dropDown.value);
 
       return incomingData.filter((person) => {
-        // @TODO - need to fix the filter
-
         if (
           +person.Employee_Salary >= 100000 &&
           +person.Employee_Salary <= 200000
