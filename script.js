@@ -58,14 +58,15 @@ const filterData = () => {
   const maxSalary = document.getElementById("max-salary").value;
 
   const filteredData = data.filter((person) => {
+    console.log(minSalary, maxSalary);
     if (minAge && maxAge) {
       if (person.Employee_Age >= minAge && person.Employee_Age <= maxAge) {
         return person;
       }
     } else if (minSalary && maxSalary) {
       if (
-        person.Employee_Salary >= minSalary &&
-        person.Employee_Salary <= maxSalary
+        +person.Employee_Salary >= +minSalary &&
+        +person.Employee_Salary <= +maxSalary
       ) {
         return person;
       }
@@ -80,13 +81,12 @@ const filterData = () => {
         if (person.Employee_Salary >= "100000") {
           return person;
         }
-
-        // if (
-        //   person.Employee_Salary >= 100000 &&
-        //   person.Employee_Salary <= 200000
-        // ) {
-        //   return person;
-        // }
+        if (
+          person.Employee_Salary >= 100000 &&
+          person.Employee_Salary <= 200000
+        ) {
+          return person;
+        }
       });
     } else if (dropDown.value === "3") {
       return data.filter((person) => {
