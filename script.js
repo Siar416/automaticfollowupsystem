@@ -57,8 +57,7 @@ const filterData = (incomingData) => {
   const minSalary = document.getElementById("min-salary").value;
   const maxSalary = document.getElementById("max-salary").value;
 
-  const filteredData = incomingData.filter((person) => {
-    console.log(minSalary, maxSalary);
+  let filteredData = incomingData.filter((person) => {
     if (minAge && maxAge) {
       if (person.Employee_Age >= minAge && person.Employee_Age <= maxAge) {
         return person;
@@ -70,43 +69,41 @@ const filterData = (incomingData) => {
       ) {
         return person;
       }
-    } else if (dropDown.value === "1") {
-      return incomingData.sort((a, b) => a.Employee_Salary - b.Employee_Salary);
+      // } else if (dropDown.value === "1") {
+      //   return incomingData.sort((a, b) => a.Employee_Salary - b.Employee_Salary);
     } else if (dropDown.value === "2") {
-      console.log(dropDown.value);
-
-      return incomingData.filter((person) => {
-        if (
-          +person.Employee_Salary >= 100000 &&
-          +person.Employee_Salary <= 200000
-        ) {
-          console.log(person.Employee_Salary);
-          return person;
-        }
-        if (
-          person.Employee_Salary >= 100000 &&
-          person.Employee_Salary <= 200000
-        ) {
-          return person;
-        }
-      });
+      if (
+        +person.Employee_Salary >= 100000 &&
+        +person.Employee_Salary <= 200000
+      ) {
+        console.log(person);
+        return person;
+      }
     } else if (dropDown.value === "3") {
-      return incomingData.filter((person) => {
-        if (
-          person.Employee_Salary >= 200000 &&
-          person.Employee_Salary <= 300000
-        ) {
-          return person;
-        }
-      });
-    } else if (dropDown.value === "4") {
-      return incomingData.sort((a, b) => b.Employee_Salary - a.Employee_Salary);
+      if (
+        +person.Employee_Salary >= 200000 &&
+        +person.Employee_Salary <= 300000
+      ) {
+        return person;
+      }
+      // } else if (dropDown.value === "4") {
+      //   return incomingData.sort((a, b) => b.Employee_Salary - a.Employee_Salary);
     } else {
       return person;
     }
   });
 
-  console.log(filteredData);
+  if (dropDown.value === "1") {
+    filteredData = incomingData.sort(
+      (a, b) => a.Employee_Salary - b.Employee_Salary
+    );
+  }
+
+  if (dropDown.value === "4") {
+    filteredData = incomingData.sort(
+      (a, b) => b.Employee_Salary - a.Employee_Salary
+    );
+  }
 
   displayData(filteredData.slice(0, 10));
   clearButton();
