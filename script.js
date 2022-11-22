@@ -4,13 +4,10 @@ const searchBtn = document.getElementById("search-btn");
 const dropDown = document.getElementById("drop-down");
 let data;
 
-// @TODO need to create a backend to make API call and send data down to client
-
-const BASE_URL =
-  "https://cors-anywhere.herokuapp.com/https://www.autofs.com/sortapi.php";
+const BASE_URL = "http://localhost:3000/api/v1/people";
 
 const getData = async () => {
-  const response = await fetch(BASE_URL, { method: "GET" });
+  const response = await fetch(BASE_URL);
   data = await response.json();
   displayData(data.slice(0, 10));
   displayButtons(data);
@@ -20,8 +17,8 @@ const clearButton = () => {
   btnEl.innerHTML = "";
 };
 
-const displayData = (data) => {
-  const htmlString = data
+const displayData = (incomingData) => {
+  const htmlString = incomingData
     .map((person) => {
       return `<tr>
     <td>${person.Employee_Name}</td>
@@ -54,54 +51,59 @@ const displayButtons = (data) => {
   });
 };
 
-const filterData = () => {
+const filterData = (incomingData) => {
   const minAge = document.getElementById("min-age").value;
   const maxAge = document.getElementById("max-age").value;
   const minSalary = document.getElementById("min-salary").value;
   const maxSalary = document.getElementById("max-salary").value;
 
-  const filteredData = data.filter((person) => {
+  let filteredData = incomingData.filter((person) => {
     if (minAge && maxAge) {
       if (person.Employee_Age >= minAge && person.Employee_Age <= maxAge) {
         return person;
       }
     } else if (minSalary && maxSalary) {
       if (
-        person.Employee_Salary >= minSalary &&
-        person.Employee_Salary <= maxSalary
+        +person.Employee_Salary >= +minSalary &&
+        +person.Employee_Salary <= +maxSalary
       ) {
         return person;
       }
-    } else if (dropDown.value === "1") {
-      return data.sort((a, b) => b.Employee_Salary - a.Employee_Salary);
+      // } else if (dropDown.value === "1") {
+      //   return incomingData.sort((a, b) => a.Employee_Salary - b.Employee_Salary);
     } else if (dropDown.value === "2") {
-      console.log(dropDown.value);
-
-      return data.filter((person) => {
-        if (
-          person.Employee_Salary >= 100000 &&
-          person.Employee_Salary <= 200000
-        ) {
-          return person;
-        }
-      });
+      if (
+        +person.Employee_Salary >= 100000 &&
+        +person.Employee_Salary <= 200000
+      ) {
+        console.log(person);
+        return person;
+      }
     } else if (dropDown.value === "3") {
-      return data.filter((person) => {
-        if (
-          person.Employee_Salary >= 200000 &&
-          person.Employee_Salary <= 300000
-        ) {
-          return person;
-        }
-      });
-    } else if (dropDown.value === "4") {
-      return data.sort((a, b) => a.Employee_Salary - b.Employee_Salary);
+      if (
+        +person.Employee_Salary >= 200000 &&
+        +person.Employee_Salary <= 300000
+      ) {
+        return person;
+      }
+      // } else if (dropDown.value === "4") {
+      //   return incomingData.sort((a, b) => b.Employee_Salary - a.Employee_Salary);
     } else {
       return person;
     }
   });
 
-  console.log(filteredData);
+  if (dropDown.value === "1") {
+    filteredData = incomingData.sort(
+      (a, b) => a.Employee_Salary - b.Employee_Salary
+    );
+  }
+
+  if (dropDown.value === "4") {
+    filteredData = incomingData.sort(
+      (a, b) => b.Employee_Salary - a.Employee_Salary
+    );
+  }
 
   displayData(filteredData.slice(0, 10));
   clearButton();
